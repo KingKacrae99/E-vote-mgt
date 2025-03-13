@@ -1,0 +1,104 @@
+{% extends 'poll/base.html' %}
+{% load static %}
+{% block title %}
+<title>Category</title>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/polling.css' %}">
+
+<!-- Section Title -->
+<div class="card-body shadow p-4 m-4 text-center " data-aos="fade-up" >
+  <h2 class="text-muted" style="font-weight:bolder;">
+    Polling Position
+  </h2>
+</div><!-- End Section Title -->
+
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials section dark-background">
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+    <div class="swiper init-swiper">
+      <script type="application/json" class="swiper-config">
+        {
+          "loop": true,
+          "speed": 600,
+          "autoplay": {
+            "delay": 5000
+          },
+          "slidesPerView": "auto",
+          "pagination": {
+            "el": ".swiper-pagination",
+            "type": "bullets",
+            "clickable": true
+          }
+        }
+      </script>
+      <div class="swiper-wrapper">
+       {% for candidate in candidates %}
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            {% if candidate.thumbnail.url %}
+            <img src="{{ candidate.thumbnail.url }}" class="testimonial-img" alt="">
+           {% else %}
+            <img src="{% static 'images/default_user_icon.jpg' %}" class="testimonial-img" alt="">
+           {% endif %}
+            <h3>{{candidate.name}}</h3>
+            <h4> Contesting for {{candidate.position}} </h4>
+            <p>
+              <i class="bi bi-quote quote-icon-left"></i>
+              <span>{{ candidate.profile }}</span>
+              <i class="bi bi-quote quote-icon-right"></i>
+            </p>
+          </div>
+        </div><!-- End testimonial item -->
+       {% endfor %}
+
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </div>
+
+</section><!-- /Testimonials Section -->
+
+
+<!-- Services Section -->
+<section id="services" class="services section">
+
+    <div class="container">
+
+      <div class="row gy-4">
+          {% for position in positions %}
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative">
+              <div class="icon">
+               {% if position.title.lower == "president" %}
+                <i class="bi bi-award"></i>
+               {% elif position.title.lower == "vice president" %}
+                <i class="bi bi-person-bounding-box"></i>
+               {% else %}
+               <i class="bi bi-person-fill"></i>
+               {% endif %}
+              </div>
+              <a href="{% url 'position' position.slug %}" class="stretched-link">
+                <h3>{{ position.title }}</h3>
+              </a>
+              <p>{{ position.descript }}</p>
+            </div>
+          </div><!-- End Service Item -->
+        {% empty %}
+          <p> No position created yet </p>
+        {% endfor %}
+      
+
+
+      </div>
+
+    </div>
+
+  </section><!-- /Services Section -->
+
+{% endblock %}

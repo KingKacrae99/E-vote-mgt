@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/Login.css' %}">
+</head>
+<body class="loginbody">
+  {% include 'poll/navbar.html' %}
+  <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+    <h3 class="text-center text-warning mb-3" style="font-family: Georgia, 'Times New Roman', Times, serif;">Verify OTP</h3>
+    <div class="card p-4 bg-dark">
+      <small class="text-light text-center">{{ message }}</small>
+      <form action="{% url 'verify_otp' phone=phone %}" method="post" class="">
+        {% csrf_token %}
+        <div class="mb-3 mt-3">
+          <label for="Phone Number" class="form-label text-warning "style="font-family: Georgia, 'Times New Roman', Times, serif;">
+            OTP:
+          </label>
+          <input type="text" class="form-control-user bg-transparent text-light p-2" id="otp" placeholder="Enter otp code" name="otp" style="border: 1px solid gray; outline: none; border-radius:5px;">
+        </div>
+      <button type="submit" class="btn btn-warning text-dark w-100"><b>verify_otp</b></button>
+      </form>
+   </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+

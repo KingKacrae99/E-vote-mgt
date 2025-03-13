@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'material/assets/img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'material/assets/img/favicon.png' %}">
+  <title>
+    Candidate Form
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" />
+  <!-- Material Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <!-- Nucleo Icons -->
+  <link href="{% static 'material/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'material/assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'material/assets/css/material-dashboard.css' %}" rel="stylesheet" />
+  <style>
+    /* Custom border styling */
+    .custom-border {
+      border: 2px solid lightgray; /* Light gray border */
+      border-radius: 5px; /* Rounded corners */
+      padding: 5px; /* Consistent spacing */
+    }
+  
+    /* Label color changes on focus */
+    .input-group input:focus ~ label,
+    .input-group textarea:focus ~ label {
+      color: gray;
+    }
+  
+    /* Input field focus styles */
+    .input-group input:focus,
+    .input-group textarea:focus {
+      border-color: #ffc107; /* Yellow border on focus */
+      box-shadow: 0 0 5px #ffc107; /* Glow effect */
+      background-color: transparent;
+      color: black;
+      outline: none;
+    }
+  
+    /* Placeholder styling */
+    input.form-control::placeholder {
+      color: gray; /* Placeholder text color */
+      font-family: 'Times New Roman', Times;
+    }
+  
+    /* Floating label functionality */
+    .input-group label {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      transition: 0.3s ease all;
+      color: gray;
+      pointer-events: none; /* Prevent blocking input interaction */
+      font-size: 16px;
+    }
+  
+    .input-group input:focus ~ .form-label,
+    .input-group textarea:focus ~ .form-label,
+    .input-group input:not(:placeholder-shown) ~ .form-label,
+    .input-group textarea:not(:placeholder-shown) ~ .form-label {
+      top: -6px;
+      font-size: 12px;
+      color: gray;
+    }
+  
+    /* Profile picture styling */
+    .input-outline label {
+      display: block;
+      margin-bottom: 5px;
+      color: gray;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  
+    .input-outline input {
+      width: 100%;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      padding: 10px;
+    }
+  
+    /* Button styling */
+    .btn {
+      font-size: 16px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+  
+    .btn:hover {
+      background-color: #ffc107;
+      color: white;
+    }
+  </style>
+</head>
+
+<body style="padding-top: 40px;">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg blur border-radius-lg fixed-top z-index-3 shadow mt-4 py-2 start-0 end-0 mx-4">
+          <div class="container-fluid ps-2 pe-0">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{% url 'dashboard' %}">
+              <i class="material-symbols-rounded opacity-10 p-2">groups</i> Candidate Form
+            </a>
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon mt-2">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'dashboard' %}">
+                    Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" href="{% url 'home' %}">
+                    Poll
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" href="{% url 'candid' %}">
+                    Candidates
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-2" href="{% url 'result' %}">
+                    Results
+                  </a>
+                </li>
+              </ul>
+              <ul class="navbar-nav d-lg-flex d-none">
+                <li class="nav-item d-flex align-items-center mx-3">
+                  <i class="material-symbols-rounded opacity-10 mx-1">account_circle</i>  {{ request.user.first_name }} {{ request.user.last_name}}
+                </li>
+                <li class="nav-item">
+                  <a href="" class="btn btn-sm mb-0 me-1 bg-gradient-dark">logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+      </div>
+    </div>
+  </div>
+  <main class="main-content  mt-0">
+    <section>
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row justify-content-center align-items-center min-vh-100">
+            <!-- Left Column -->
+            <div class="col-lg-4 d-none d-lg-flex h-100 my-auto pe-0 justify-content-center">
+              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+              </div>
+            </div>
+        
+            <!-- Middle Column (Form) -->
+            <div class="col-lg-4 col-md-8 col-sm-10">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="font-weight-bolder text-center text-muted">Candidate Registration</h4>
+                  <p class="mb-0 text-center">Fill the form below</p>
+                </div>
+                <div class="card-body">
+                  <form action="" method="post" role="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Full Name Field -->
+                    <div class="input-group input-group-outline mb-3">
+                      {{ form.name }} <!-- Add placeholder to trigger floating label -->
+                      <label for="name" class="form-label">Full Name</label>
+                    </div>
+                  
+                    <!-- Position Field -->
+                    <div class="input-group input-group-outline mb-3">
+                      {{ form.position }} <!-- Ensure placeholder exists -->
+                    </div>
+                  
+                    <!-- Profile Picture Field -->
+                    <div class="input-outline mb-3">
+                      <label for="image" class="form-label">Profile Picture</label>
+                      {{ form.profile_pic }}
+                    </div>
+                  
+                    <!-- Bio/Profile Field -->
+                    <div class="input-group input-group-outline mb-3">
+                      {{ form.profile }} <!-- Add placeholder -->
+                      <label for="phone" class="form-label">Bio/Profile</label>
+                    </div>
+                  
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-lg bg-gradient-dark btn-lg w-100 mt-4 mb-0">Register</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Right Column -->
+            <div class="col-lg-4 d-none d-lg-flex h-100 my-auto ps-0 justify-content-center">
+              <!-- Optional additional content can go here -->
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+  </main>
+  <!--   Core JS Files   -->
+  <script src="{% static 'material/assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'material/assets/js/core/bootstrap.min.js' %}"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{% static 'material/assets/js/material-dashboard.min.js' %}"></script>
+</body>
+
+</html>

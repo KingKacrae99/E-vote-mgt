@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.loginbody{
+    background: linear-gradient(to top,rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.85)), url('../images/testimonials-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+input.form-control {
+    background-color: transparent; /* Keeps the background transparent */
+    border: 2px solid gray; /* Border color and thickness */
+    color: white; /* Text color of the input */
+    border-radius: 5px; /* Rounded corners for the input */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 10px; /* Padding inside the input */
+}
+
+input.form-control:focus {
+    background-color: transparent; /* Keeps the background transparent when focused */
+    outline: none; /* Removes default outline on focus */
+    box-shadow: 0 0 5px #ffc107; /* Glow effect on focus */
+    border-color: #ffc107; /* Border color on focus for visibility */
+    color: white;
+}
+
+input.form-control::placeholder {
+    color: gray; /* Placeholder text color set to white */
+    font-family:'Times New Roman', Times;
+}

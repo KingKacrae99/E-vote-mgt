@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  {% block title %}
+    <title>Polling System</title>
+  {% endblock%}
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{%static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+  {% include 'poll/navbar.html' %}
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <img src="{% static 'images/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+
+      <div class="container">
+
+        <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-xl-6 col-lg-8">
+            <h2>E-Voting System<span>.</span></h2>
+            <p> Redefined secure, transparent, and accessible online voting.</p>
+          </div>
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        {% if request.user.is_admin %}
+          <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <i class="bi bi-ui-checks-grid flex-shrink-0"></i>
+              <h3><a href="{% url 'dashboard' %}">Dashboard</a></h3>
+            </div>
+          </div>
+        {% endif %}
+          <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="icon-box">
+              <i class="bi bi-person-fill bi-2x"></i>
+              <h3><a href="{% url 'create_candidacy' %}">Become a candidate</a></h3>
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="600">
+            <div class="icon-box">
+              <i class="bi bi-card-list"></i>
+              <h3><a href="">Position</a></h3>
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="700">
+            <div class="icon-box">
+              <i class="bi bi-gem"></i>
+              <h3><a href="{% url 'poll' %}">Result</a></h3>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      </div>
+
+    </section><!-- /Hero Section -->
+  </main>
+    {% block content %}
+
+  {% endblock %}
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-3 footer-links"></div>
+
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <span class="sitename text-warning">E-Vote</span>
+            </a>
+            <div class="footer-contact pt-3">
+              <p>Head-office Street</p>
+              <p>Abuja, FCT, Nigeria</p>
+              <p class="mt-3"><strong>Phone:</strong> <span>+234 701854 7659</span></p>
+              <p><strong>Email:</strong> <span>kacrae9@gmail.com</span></p>
+            </div>
+            <div class="social-links d-flex mt-4">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4 class="text-warning">Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'login' %}">login</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{%url 'candid' %}"> Candidates</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'poll' %}"> </a>Positions</li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Setting</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-3 footer-links"></div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div class="container text-center">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">E-Vote</strong> <span>All Rights Reserved</span></p>
+        <div class="credits">
+          Designed by <a href="https://kingkacrae99.github.io/wdd130/">King Kacrae</a>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static '/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static '/vendor/aos/aos.js' %}"></script>
+  <script src="{% static '/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static '/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static '/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static '/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static '/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'javascripts/main.js' %}"></script>
+
+</body>
+
+</html>

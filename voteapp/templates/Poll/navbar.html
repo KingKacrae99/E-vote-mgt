@@ -1,0 +1,36 @@
+{% load static %}
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{%static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<!-- Main CSS File -->
+<link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+<header id="header" class="header d-flex align-items-center fixed-top" style="margin: 0%;">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'home' %}" class="active">Home<br></a></li>
+          <li><a href="{% url 'result' %}" class="active">Results<br></a></li>
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'poll' %}">Poll</a></li>
+          <li><a href="{% url 'candid' %}">Contestants</a></li>
+          <li><a href="#portfolio"></a></li>
+          <li><a href="{% url 'update_info' request.user.phone %}">Setting</a></li>
+          {% endif %}
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      {% if not request.user.is_authenticated %}
+       <a class="btn p-2 btn-warning text-light" href="{% url 'login' %}"><i class="fas fa-user"></i> <b>login</b></a>
+      {% else %}
+      <p class="text-light">welcome {{request.user.first_name}} {{request.user.last_name}}</p>
+       <a class="btn p-2 btn-warning text-light" href="{% url 'logout' %}"><i class="fas fa-user"></i> <b>logout</b></a>
+      {% endif %}
+
+    </div>
+  </header>

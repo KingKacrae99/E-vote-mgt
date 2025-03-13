@@ -1,0 +1,25 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Vote-Sys Delete{{candidate.name}}</title>
+{% endblock %}
+
+{% block content %}
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    {% include 'pages/navbar.html' %}
+    <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height:100vh;">
+        <div class="card-body shadow py-3 text-center" style="max-width:90%; width:400px;">
+            <strong class="text-center text-muted">Are you sure you want to delete</strong>
+            <small class="text-center text-muted">'{{ position.title }}'?</small>
+            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mt-4">
+                <a href="{% url 'poll' %}" class="btn bg-gradient-warning">Cancel</a>
+                <form method="post" action="{% url 'delete_post' position.pk %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete" class="btn bg-gradient-danger">
+                </form>
+            </div>
+        </div>
+    </div>    
+</main>
+{% endblock %}
